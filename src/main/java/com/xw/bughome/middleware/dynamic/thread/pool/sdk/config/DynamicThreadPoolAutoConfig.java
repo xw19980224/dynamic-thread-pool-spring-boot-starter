@@ -39,7 +39,7 @@ public class DynamicThreadPoolAutoConfig {
 
     private String applicationName;
 
-    @Bean("redissonClient")
+    @Bean("dynamicThreadRedissonClient")
     public RedissonClient redissonClient(DynamicThreadPoolAutoProperties properties) {
         Config config = new Config();
         // 根据需要可以设定编解码器；https://github.com/redisson/redisson/wiki/4.-%E6%95%B0%E6%8D%AE%E5%BA%8F%E5%88%97%E5%8C%96
@@ -66,8 +66,8 @@ public class DynamicThreadPoolAutoConfig {
     }
 
     @Bean
-    public IRegistry redisRegistry(RedissonClient redissonClient) {
-        return new RedisRegistry(redissonClient);
+    public IRegistry redisRegistry(RedissonClient dynamicThreadRedissonClient) {
+        return new RedisRegistry(dynamicThreadRedissonClient);
     }
 
     @Bean("dynamicThreadPoolService")
